@@ -33,6 +33,10 @@ namespace OneTimePassword
 
     public  string GenerateSecret(object seed)
     {
+
+      if (seed is null) {
+        throw new System.ArgumentNullException(nameof(seed));
+      }
       var bytes = Encoding.UTF8.GetBytes(seed.ToString());
       SHA256 sha256 = SHA256.Create();
       var hash = sha256.ComputeHash(bytes);
